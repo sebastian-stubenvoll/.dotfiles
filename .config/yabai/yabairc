@@ -15,8 +15,14 @@ yabai -m config bottom_padding 25
 yabai -m config left_padding 25
 yabai -m config right_padding 25
 
+#spaces
+yabai -m space 1 --label main
+yabai -m space 2 --label music || yabai -m space --create && yabai -m space 2 --label music
+yabai -m space 3 --label third || yabai -m space --create && yabai -m space 3 --label third 
+
+
+
 #rules
 yabai -m rule --add app="System Preferences" manage=off
-
 
 echo "yabai initialized"
