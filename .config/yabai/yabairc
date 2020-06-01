@@ -16,10 +16,15 @@ yabai -m config left_padding 25
 yabai -m config right_padding 25
 
 #spaces
-yabai -m space 1 --label main
-yabai -m space 2 --label music || yabai -m space --create && yabai -m space 2 --label music
+yabai -m space 1 --label first
+yabai -m space 2 --label second || yabai -m space --create && yabai -m space 2 --label second
 yabai -m space 3 --label third || yabai -m space --create && yabai -m space 3 --label third 
-
+yabai -m space 4 --label fourth || yabai -m space --create && yabai -m space 4 --label fourth 
+yabai -m space 5 --label fifth || yabai -m space --create && yabai -m space 5 --label fifth 
+yabai -m space 6 --label sixth || yabai -m space --create && yabai -m space 6 --label sixth 
+yabai -m space 7 --label seventh || yabai -m space --create && yabai -m space 7 --label seventh 
+yabai -m space 8 --label eighth || yabai -m space --create && yabai -m space 8 --label eighth 
+yabai -m space 9 --label ninth || yabai -m space --create && yabai -m space 9 --label ninth 
 
 
 #rules
