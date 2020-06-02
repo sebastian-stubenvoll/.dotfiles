@@ -8,6 +8,12 @@ fn - j : yabai -m window --focus south
 fn - k : yabai -m window --focus north
 fn - l : yabai -m window --focus east
 
+#alternative focus bind b/c keyboard blocks fn - l
+ctrl - h : yabai -m window --focus west
+ctrl - j : yabai -m window --focus south
+ctrl - k : yabai -m window --focus north
+ctrl - l : yabai -m window --focus east
+
 #insert window
 fn + shift - h : yabai -m window --warp west
 fn + shift - j : yabai -m window --warp south
@@ -59,12 +65,22 @@ fn + shift - 7 : yabai -m window --space seventh
 fn + shift - 8 : yabai -m window --space eighth
 fn + shift - 9 : yabai -m window --space ninth
 
+ctrl + shift + alt - 1 : yabai -m window --display 1
+ctrl + shift + alt - 2 : yabai -m window --display 2
+
+ctrl + shift + cmd - 1 : yabai -m display --focus 1
+ctrl + shift + cmd - 2 : yabai -m display --focus 2
+
+
+
+
 #flip layout
 fn - 0 : yabai -m space --mirror y-axis 
 fn + shift - 0 : yabai -m space --mirror x-axis 
 
 #layout toggle
 fn + shift + alt - 0 : "${HOME}"/.config/skhd/scripts/layout_toggle.sh  
+fn + shift + cmd - 0 : "${HOME}"/.config/skhd/scripts/opacity_toggle.sh  
 fn - f : yabai -m window --toggle float
 
 #ctrl track controls
