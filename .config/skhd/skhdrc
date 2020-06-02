@@ -37,6 +37,17 @@ fn - 7 : yabai -m space --focus seventh
 fn - 8 : yabai -m space --focus eighth
 fn - 9 : yabai -m space --focus ninth
 
+#alternative space binds
+ctrl + shift - 1 : yabai -m space --focus first 
+ctrl + shift - 2 : yabai -m space --focus second
+ctrl + shift - 3 : yabai -m space --focus third
+ctrl + shift - 4 : yabai -m space --focus fourth
+ctrl + shift - 5 : yabai -m space --focus fifth
+ctrl + shift - 6 : yabai -m space --focus sixth
+ctrl + shift - 7 : yabai -m space --focus seventh
+ctrl + shift - 8 : yabai -m space --focus eighth
+ctrl + shift - 9 : yabai -m space --focus ninth
+
 #send windows
 fn + shift - 1 : yabai -m window --space first
 fn + shift - 2 : yabai -m window --space second
@@ -52,14 +63,17 @@ fn + shift - 9 : yabai -m window --space ninth
 fn - 0 : yabai -m space --mirror y-axis 
 fn + shift - 0 : yabai -m space --mirror x-axis 
 
-#spotify track controls
+#layout toggle
+fn + shift + alt - 0 : "${HOME}"/.config/skhd/scripts/layout_toggle.sh  
+
+#ctrl track controls
 fn + shift - b : spotify prev
 fn + shift - n : spotify next
 fn + shift - m : spotify pause
+
 #spotify volume
 fn + shift - 0x2B : spotify vol down
 fn + shift - 0x2F : spotify vol up
 
 #quick reload
-
 ctrl + alt + cmd - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
