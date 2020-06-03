@@ -65,14 +65,15 @@ fn + shift - 7 : yabai -m window --space seventh
 fn + shift - 8 : yabai -m window --space eighth
 fn + shift - 9 : yabai -m window --space ninth
 
+#space management
 ctrl + shift + alt - 1 : yabai -m window --display 1
 ctrl + shift + alt - 2 : yabai -m window --display 2
 
 ctrl + shift + cmd - 1 : yabai -m display --focus 1
 ctrl + shift + cmd - 2 : yabai -m display --focus 2
 
-
-
+cmd + ctrl - 1 : yabai -m space --display 1
+cmd + ctrl - 2 : yabai -m space --display 2
 
 #flip layout
 fn - 0 : yabai -m space --mirror y-axis 
