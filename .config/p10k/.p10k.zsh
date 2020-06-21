@@ -30,10 +30,8 @@
 
   # The list of segments shown on the left. Fill it with the most important segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
-    os_icon                 # os identifier
     dir                     # current directory
     vcs                     # git status
-    prompt_char             # prompt symbol
   )
 
   # The list of segments shown on the right. Fill it with less important segments.
@@ -44,6 +42,7 @@
     status                  # exit code of the last command
     command_execution_time  # duration of the last command
     background_jobs         # presence of background jobs
+    custom_rprompt
     direnv                  # direnv status (https://direnv.net/)
     asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
     virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
@@ -84,14 +83,14 @@
     midnight_commander      # midnight commander shell (https://midnight-commander.org/)
     nix_shell               # nix shell (https://nixos.org/nixos/nix-pills/developing-with-nix-shell.html)
     # vpn_ip                # virtual private network indicator
-    # load                  # CPU load
+    load                  # CPU load
     # disk_usage            # disk usage
-    # ram                   # free RAM
+    ram                   # free RAM
     # swap                  # used swap
-    todo                    # todo items (https://github.com/todotxt/todo.txt-cli)
+    #todo                    # todo items (https://github.com/todotxt/todo.txt-cli)
     timewarrior             # timewarrior tracking status (https://timewarrior.net/)
     taskwarrior             # taskwarrior task count (https://taskwarrior.org/)
-    time                    # current time
+    #time                    # current time
     # ip                    # ip address and bandwidth usage for a specified network interface
     # public_ip             # public IP address
     # proxy                 # system-wide http/https/ftp proxy
@@ -99,6 +98,9 @@
     # wifi                  # wifi speed
     # example               # example user-defined segment (see prompt_example function below)
   )
+
+  #pipenv stuff
+  typeset -g POWERLEVEL9K_VIRTUALENV_GENERIC_NAMES=(virtualenv venv .venv env)
 
   # Defines character set used by powerlevel10k. It's best to let `p10k configure` set it for you.
   typeset -g POWERLEVEL9K_MODE=nerdfont-complete
@@ -777,7 +779,7 @@
   ##############[ taskwarrior: taskwarrior task count (https://taskwarrior.org/) ]##############
   # Taskwarrior color.
   typeset -g POWERLEVEL9K_TASKWARRIOR_FOREGROUND=6
-  
+
   # Taskwarrior segment format. The following parameters are available within the expansion.
   #
   # - P9K_TASKWARRIOR_PENDING_COUNT   The number of pending tasks: `task +PENDING count`.
@@ -822,7 +824,7 @@
   # Python virtual environment color.
   typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=6
   # Don't show Python version next to the virtual environment name.
-  typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=false
+  typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=true
   # Don't show virtualenv if pyenv is already shown.
   typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_WITH_PYENV=false
   # Separate environment name from Python version only with a space.
