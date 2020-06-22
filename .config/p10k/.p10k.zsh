@@ -720,7 +720,7 @@
   # RAM color.
   typeset -g POWERLEVEL9K_RAM_FOREGROUND=2
   # Custom icon.
-  # typeset -g POWERLEVEL9K_RAM_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  typeset -g POWERLEVEL9K_RAM_VISUAL_IDENTIFIER_EXPANSION=''
 
   #####################################[ swap: used swap ]######################################
   # Swap color.
@@ -730,7 +730,7 @@
 
   ######################################[ load: CPU load ]######################################
   # Show average CPU load over this many last minutes. Valid values are 1, 5 and 15.
-  typeset -g POWERLEVEL9K_LOAD_WHICH=5
+  typeset -g POWERLEVEL9K_LOAD_WHICH=1
   # Load color when load is under 50%.
   typeset -g POWERLEVEL9K_LOAD_NORMAL_FOREGROUND=2
   # Load color when load is between 50% and 70%.
