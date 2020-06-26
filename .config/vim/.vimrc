@@ -1,5 +1,7 @@
 set nu
 set relativenumber
+set path+=**
+set wildmenu
 syntax on
 colorscheme dim 
 
