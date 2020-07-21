@@ -1,1 +1,1 @@
-export CLICOLOR=1
+/Users/sebastian/.config/bash/.bash_profile
