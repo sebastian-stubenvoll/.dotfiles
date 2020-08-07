@@ -13,6 +13,8 @@ Plug 'hdima/python-syntax'
 Plug 'tpope/vim-surround'
 Plug 'preservim/nerdcommenter'
 Plug 'tpope/vim-repeat'
+Plug 'vim-scripts/indentpython.vim'
+Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 
