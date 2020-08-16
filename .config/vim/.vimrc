@@ -15,6 +15,7 @@ Plug 'preservim/nerdcommenter'
 Plug 'tpope/vim-repeat'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'sheerun/vim-polyglot'
+Plug 'ervandew/supertab'
 
 call plug#end()
 
