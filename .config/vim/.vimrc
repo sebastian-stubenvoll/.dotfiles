@@ -16,6 +16,7 @@ Plug 'tpope/vim-repeat'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'ervandew/supertab'
+Plug 'mxw/vim-jsx'
 
 call plug#end()
 
