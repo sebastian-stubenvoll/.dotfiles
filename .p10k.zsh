@@ -1,1 +1,1 @@
-/Users/sebastian/.config/p10k/.p10k.zsh
+.config/p10k/.p10k.zsh
