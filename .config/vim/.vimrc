@@ -1,9 +1,14 @@
-set nu
+stabet nu
 set relativenumber
 set path+=**
 set wildmenu
+set backspace=start,eol,indent
+set hidden
+set shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent smartindent
+
 syntax on
 colorscheme dim 
+filetype plugin indent on
 
 call plug#begin()
 
