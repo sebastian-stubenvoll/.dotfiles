@@ -1,4 +1,4 @@
-stabet nu
+set nu
 set relativenumber
 set path+=**
 set wildmenu
