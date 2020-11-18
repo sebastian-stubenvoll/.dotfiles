@@ -1,1 +1,0 @@
-/Users/sebastian/.config/bash/.bash_profile
