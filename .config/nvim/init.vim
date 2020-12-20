@@ -27,6 +27,8 @@ Plug 'justinmk/vim-sneak'
 Plug 'donRaphaco/neotex', { 'for': 'tex' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'honza/vim-snippets'
+Plug 'vim-airline/vim-airline'
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
@@ -35,6 +37,7 @@ map <C-n> :NERDTreeToggle<CR>
 let g:tex_flavor = 'latex'
 
 let g:gruvbox_contrast_dark = 'soft'
+let g:gruvbox_termcolors = '256'
 autocmd vimenter * ++nested colorscheme gruvbox
 
 "CoC shebang ahead"
