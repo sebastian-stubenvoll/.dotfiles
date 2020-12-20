@@ -102,9 +102,11 @@ source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-source ~/.oh-my-zsh/custom/materials/.zsh-theme-gruvbox-material-dark
 source ~/.oh-my-zsh/custom/themes/powerlevel10k/powerlevel10k.zsh-theme
-export LSCOLORS=ExGxBxCxDxEgEdxbxgxcxd
+export LSCOLORS=ExBxGxFxDxxexbDxGxxfxd
 
 export EDITOR='vim'
 export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+# To customize prompt, run `p10k configure` or edit ~/.config/p10k/.p10k.zsh.
+[[ ! -f ~/.config/p10k/.p10k.zsh ]] || source ~/.config/p10k/.p10k.zsh
