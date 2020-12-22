@@ -29,5 +29,7 @@ yabai -m space 9 --label ninth || yabai -m space --create && yabai -m space 9 --
 
 #rules
 yabai -m rule --add app="System Preferences" manage=off
+yabai -m rule --add app="Spotify" manage=on
+yabai -m rule --add app="Finder" manage=on
 
 echo "yabai initialized"
