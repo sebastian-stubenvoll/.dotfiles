@@ -1,6 +1,6 @@
 #iTerm
 fn - t : open -a /Applications/iTerm.app
-fn + shift - t: "${HOME}"/.config/skhd/scripts/open_iterm2.sh
+fn + shift - t: "${HOME}"/.config/scripts/open_iterm2.sh
 
 #move focus
 fn - h : yabai -m window --focus west
@@ -92,6 +92,10 @@ fn + shift - m : spotify pause
 #spotify volume
 fn + shift - 0x2B : spotify vol down
 fn + shift - 0x2F : spotify vol up
+
+#mktex
+fn + cmd - n: "${HOME}"/.config/scripts/mktex_autoname.py
+
 
 #quick reload
 ctrl + alt + cmd - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"

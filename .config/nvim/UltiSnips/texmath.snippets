@@ -1,0 +1,147 @@
+##############
+# MATH STUFF #
+##############
+priority 0
+snippet '([A-Za-z])_(\d\d)' "auto subscript" wrA
+`!p snip.rv = match.group(1)`_{`!p snip.rv = match.group(2)`}
+endsnippet
+
+priority 0
+snippet SQ "^2" iA
+^2$0
+endsnippet
+
+priority 0
+snippet CB "^3" iA
+^3$0
+endsnippet
+
+priority 0
+snippet SC "superscript" iA
+^{$1}$0
+endsnippet
+
+priority 0
+snippet // "Fraction" i
+\\frac{$1}{$2}$0
+endsnippet
+
+priority 100
+snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)//' "Fraction" wrA
+\\frac{`!p snip.rv = match.group(1)`}{$1}$0
+endsnippet
+
+priority 1000
+snippet '^.*\)//' "() Fraction" wrA
+`!p
+stripped = match.string[:-2]
+depth = 0
+i = len(stripped) - 1
+while True:
+	if stripped[i] == ')': depth += 1
+	if stripped[i] == '(': depth -= 1
+	if depth == 0: break;
+	i -= 1
+snip.rv = stripped[0:i] + "\\frac{" + stripped[i+1:-1] + "}"
+`{$1}$0
+endsnippet
+
+priority 100
+snippet RT "root" 
+\sqrt[\leftroot{-3}\uproot{3}$1]{$2}$0
+endsnippet
+
+priority 100
+snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)RT\d' "root" wrA
+\sqrt[\leftroot{1}\uproot{2}`!p snip.rv = match.group(0)[-1]`]{`!p snip.rv = match.group(1)`}$0
+endsnippet
+
+priority 1000
+snippet '^.*\)RT\d' "root" wrA
+`!p
+p = match.string[-1]
+stripped = match.string[:-3]
+depth = 0
+i = len(stripped) - 1
+while True:
+	if stripped[i] == ')': depth += 1
+	if stripped[i] == '(': depth -= 1
+	if depth == 0: break;
+	i -= 1
+snip.rv = stripped[0:i] + "\\sqrt[\\leftroot{1}\\uproot{2}"+ p +"]{" + stripped[i+1:-1] + "}"
+`$0
+endsnippet
+
+priority 0
+snippet int "integral" w
+\int_${1/.+/{/}${1:lower}${1/.+/}/}^${2/.+/{/}${2:upper}${2/.+/}/} ${3:expression}\ d${4:integration variable} $0
+endsnippet
+
+################
+# ENVIRONMENTS #
+################
+
+priority 0
+snippet lm "Math" wA
+$${1}$`!p
+if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
+    snip.rv = ' '
+else:
+    snip.rv = ''
+`$2
+endsnippet
+
+priority 0
+snippet dm "Math" wA
+\[
+$1
+.\] $0
+endsnippet
+
+priority 0
+snippet eq "Equation" b
+\begin{equation}
+\label{eq:$1}
+	${2:${VISUAL}}
+\end{equation}
+$0
+endsnippet
+
+priority 0
+snippet eqnn "Equation" b
+\begin{equation*}
+\label{eq:$1}
+	${2:${VISUAL}}
+\end{equation*}
+$0
+endsnippet
+
+priority 0
+snippet al "Align" b
+\begin{align}
+	${0:${VISUAL}}
+\end{align}
+endsnippet
+
+priority 0
+snippet alnn "Align without a number" b
+\begin{align*}
+	${0:${VISUAL}}
+\end{align*}
+endsnippet
+
+priority 0
+snippet eqa "Equation array" b
+\begin{eqnarray}
+	${1:${VISUAL}} & ${2:${VISUAL}} & ${0:${VISUAL}}
+\end{eqnarray}
+endsnippet
+
+priority 0
+snippet eqann "Equation array without a number" b
+\begin{eqnarray*}
+	${1:${VISUAL}} & ${2:${VISUAL}} & ${0:${VISUAL}}
+\end{eqnarray*}
+endsnippet
+
+# vim:ft=snippets:

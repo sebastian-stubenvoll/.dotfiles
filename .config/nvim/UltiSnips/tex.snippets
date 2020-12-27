@@ -1,0 +1,368 @@
+priority -50
+
+extends texmath
+extends texsymbols
+extends texeval
+extends texpostfix
+
+global !p
+
+def create_table(snip):
+	rows = snip.buffer[snip.line].split('x')[0]
+	cols = snip.buffer[snip.line].split('x')[1]
+
+	int_val = lambda string: int(''.join(s for s in string if s.isdigit()))
+
+	rows = int_val(rows)
+	cols = int_val(cols)
+
+	offset = cols + 1
+	old_spacing = snip.buffer[snip.line][:snip.buffer[snip.line].rfind('\t') + 1]
+
+	snip.buffer[snip.line] = ''
+
+	final_str = old_spacing + "\\begin{tabular}{" + " ".join(['${' + str(i + 1) + ':?}' for i in range(cols)]) + "}\n"
+
+	for i in range(rows):
+		descriptor = "header" if i == 0 else "item"
+		final_str += old_spacing + '\t'
+		final_str += " & ".join(['${' + str(i * cols + j + offset) + ': {}'.format(descriptor) + '}' for j in range(cols)])
+
+		final_str += " \\\\\\"
+		if i == 0: final_str += " \\hline"
+		final_str += " \n"
+
+	final_str += old_spacing + "\\end{tabular}\n$0"
+
+	snip.expand_anon(final_str)
+
+def add_row(snip):
+	row_len = int(''.join(s for s in snip.buffer[snip.line] if s.isdigit()))
+	old_spacing = snip.buffer[snip.line][:snip.buffer[snip.line].rfind('\t') + 1]
+
+	snip.buffer[snip.line] = ''
+
+	final_str = old_spacing
+	final_str += " & ".join(['${' + str(j + 1) + ': item}' for j in range(row_len)])
+	final_str += " \\\\\\"
+
+	snip.expand_anon(final_str)
+
+endglobal
+
+priority 0
+snippet pre "basic peramble for quickly taking notes" bA
+\documentclass[12pt]{report}
+\usepackage[T1]{fontenc}	
+\usepackage[bottom,hang]{footmisc}
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{dsfont}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{physics}
+\usepackage{minted}
+\usepackage[bf,hang,nooneline,justification=centering]{caption}
+\usepackage{booktabs}
+\usepackage[a4paper, left=2cm, top=2cm, bottom=2cm, right=3cm]{geometry}
+\usepackage{titlesec}
+
+\titleformat{\chapter}[display]
+  {\normalfont\bfseries}{}{0pt}{\Huge}
+
+endsnippet
+
+priority 0
+snippet begin "begin{} / end{}" bA
+\begin{$1}
+	$0
+\end{$1}
+endsnippet
+
+priority 0
+snippet abs "abstract environment" b
+\begin{abstract}
+	$0
+\end{abstract}
+endsnippet
+
+priority 0
+pre_expand "create_table(snip)"
+snippet "tab(\d+)x(\d+)" "Generate table of *width* by *height*" r
+endsnippet
+
+priority 0
+pre_expand "add_row(snip)"
+snippet "tr(\d+)" "Add table row of dimension ..." r
+endsnippet
+
+priority 0
+snippet table "Table environment" b
+\begin{table}[${1:htpb}]
+	\centering
+	\caption{${2:caption}}
+	\label{tab:${3:label}}
+	\begin{${4:t}${4/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}{${5:c}}
+	${0:header}${5/(?<=.)(c|l|r)|./(?1: & header)/g} \\\\ \hline
+	\end{$4${4/(t)$|(a)$|(.*)/(?1:abular)(?2:rray)/}}
+\end{table}
+endsnippet
+
+priority 0
+snippet fig "Figure environment" b
+\begin{figure}[${2:htpb}]
+	\centering
+	\includegraphics[width=${3:0.8}\linewidth]{${4:name.ext}}
+	\caption{${4/(\w+)\.\w+/\u$1/}$0}%
+	\label{fig:${4/(\w+)\.\w+/$1/}}
+\end{figure}
+endsnippet
+
+priority 0
+snippet enum "Enumerate" b
+\begin{enumerate}
+	\item $0
+\end{enumerate}
+endsnippet
+
+priority 0
+snippet item "Itemize" b
+\begin{itemize}
+	\item $0
+\end{itemize}
+endsnippet
+
+priority 0
+snippet desc "Description" b
+\begin{description}
+	\item[$1] $0
+\end{description}
+endsnippet
+
+priority 0
+snippet it "Individual item" b
+\item $0
+endsnippet
+
+priority 0
+snippet dit "Individual item" b
+\item[$1] $0
+endsnippet
+
+priority 0
+snippet part "Part" b
+\part{${1:part name}}%
+\label{prt:${2:${1/(\w+)|\W+/(?1:\L$0\E:_)/ga}}}
+
+$0
+endsnippet
+
+priority 0
+snippet cha "Chapter" b
+\chapter{${1:chapter name}}%
+\label{cha:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+$0
+endsnippet
+
+priority 0
+snippet sec "Section"
+\section{${1:${VISUAL:section name}}}%
+\label{sec:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+$0
+endsnippet
+
+priority 0
+snippet secnn "Section"
+\section*{${1:${VISUAL:section name}}}%
+\label{sec:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+${0}
+endsnippet
+
+
+priority 0
+snippet sub "Subsection"
+\subsection{${1:${VISUAL:subsection name}}}%
+\label{sub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+$0
+endsnippet
+
+priority 0
+snippet subnn "Subsection"
+\subsection*{${1:${VISUAL:subsection name}}}%
+\label{sub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+${0}
+endsnippet
+
+priority 0
+snippet ssub "Subsubsection"
+\subsubsection{${1:${VISUAL:subsubsection name}}}%
+\label{ssub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+$0
+endsnippet
+
+priority 0
+snippet ssubnn "Subsubsection"
+\subsubsection*{${1:${VISUAL:subsubsection name}}}%
+\label{ssub:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+${0}
+endsnippet
+
+priority 0
+snippet par "Paragraph"
+\paragraph{${1:${VISUAL:paragraph name}}}%
+\label{par:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+$0
+endsnippet
+
+priority 0
+snippet subp "Subparagraph"
+\subparagraph{${1:${VISUAL:subparagraph name}}}%
+\label{par:${2:${1/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+
+$0
+endsnippet
+
+priority 0
+snippet ac "Acroynm normal" b
+\ac{${1:acronym}}
+$0
+endsnippet
+
+priority 0
+snippet acl "Acroynm expanded" b
+\acl{${1:acronym}}
+$0
+endsnippet
+
+priority 0
+snippet ni "Non-indented paragraph" b
+\noindent
+$0
+endsnippet
+
+priority 0
+snippet pac "Package" b
+\usepackage`!p snip.rv='[' if t[1] else ""`${1:options}`!p snip.rv = ']' if t[1] else ""`{${2:package}}$0
+endsnippet
+
+priority 0
+snippet lp "Long parenthesis"
+\left(${1:${VISUAL:contents}}\right)$0
+endsnippet
+
+priority 0
+snippet "mint(ed)?( (\S+))?" "Minted code typeset" br
+\begin{listing}
+\begin{minted}[linenos,numbersep=5pt,frame=lines,framesep=2mm]{${1:`!p
+snip.rv = match.group(3) if match.group(2) is not None else "language"`}}
+${2:${VISUAL:code}}
+\end{minted}
+\caption{${3:caption name}}
+\label{lst:${4:${3/\\\w+\{(.*?)\}|\\(.)|(\w+)|([^\w\\]+)/(?4:_:\L$1$2$3\E)/ga}}}
+\end{listing}
+
+$0
+endsnippet
+
+priority 0
+snippet gln "New glossary item" b
+\newglossaryentry{${1:identifier}}
+{
+  name={${2:name}},
+  first={${3:first occurrence}},
+  sort={${4:sort value}},
+  description={${0:description}},
+}
+endsnippet
+
+priority 0
+snippet glnl "New long glossary item" b
+\longnewglossaryentry{${1:identifier}}
+{
+  name={${2:name}},
+  first={${3:first occurrence}},
+  sort={${4:sort value}},
+}
+{
+  ${0:description}
+}
+endsnippet
+
+# Bold text
+priority 10
+snippet bf "Bold" w
+\textbf{$1}$0
+endsnippet
+
+priority 100
+snippet "(\w+)BF" "Bold postfix" riA
+\textbf{`!p snip.rv=match.group(1)`}$0
+endsnippet
+
+# Italic text
+priority 0
+snippet ita "Italics" w
+\textit{$1}$0
+endsnippet
+
+priority 100
+snippet "(\w+)ITA" "Italics postfix" riA
+\textit{`!p snip.rv=match.group(1)`}$0
+endsnippet
+
+# Underlined text
+priority 0
+snippet und "Underline" w
+\underline{$1}$0
+endsnippet
+
+priority 100
+snippet "(\w+)UND" "Underline postfix" riA
+\underline{`!p snip.rv=match.group(1)`}$0
+endsnippet
+
+priority 0
+snippet nl "new line"
+\newline
+$0
+endsnippet
+
+priority 100
+snippet nl "new line" bA
+\newline
+$0
+endsnippet
+
+priority 0
+snippet np "new page"
+\newpage
+$0
+endsnippet
+
+priority 100
+snippet np "new page" bA
+\newpage
+$0
+endsnippet
+
+priority 0
+snippet ref "reference" 
+\ref{${1:lable}}$0
+endsnippet
+
+priority 100
+snippet "(\w+)REF" "reference postfix" riA
+\ref{`!p snip.rv=match.group(1)`}$0
+endsnippet
+
+# vim:ft=snippets:

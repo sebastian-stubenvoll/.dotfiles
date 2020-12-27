@@ -12,12 +12,12 @@ fi
 
 query=$(yabai -m query --windows --space fifth | jq -r 'select(length>0)')
 cur=$(pwd)
+yabai -m space --focus fifth
 if [ -z "${query}" ]; then
-    yabai -m space --focus fifth
     convert xc:none -page A4 $1.pdf
     ~/.config/scripts/openPdf.sh $1.pdf
-    osascript -e 'if application "iTerm2" is not running then' -e 'activate application "iTerm2"'
-    osascript -e 'tell application "iTerm2"' -e 'set newWindow to (create window with default profile)' -e 'tell current session of newWindow' -e 'write text "cd '"$cur"' && nvim -c '"NeoTexOn"' '"$1"'.tex"' -e 'end tell' -e 'end tell'
+    osascript -e 'if application "iTerm" is not running then' -e 'activate application "iTerm"' -e 'end if'
+    osascript -e 'tell application "iTerm"' -e 'set newWindow to (create window with default profile)' -e 'tell current session of newWindow' -e 'write text "cd '"$cur"' && nvim -c NeoTexOn '"$1"'.tex"' -e 'end tell' -e 'end tell'
 else
     osascript -e 'display notification "the space reserved for TeX-editing + PDF viewer was not empty" with title "Woops!"'
 fi
