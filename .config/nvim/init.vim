@@ -5,7 +5,7 @@ set path+=**
 set wildmenu
 set backspace=start,eol,indent
 set hidden
-set shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent smartindent
+set shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent 
 set termguicolors
 
 syntax on
@@ -55,9 +55,9 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 "Spelling
-setlocal spell
-set spelllang=de,en_gb
-inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+"setlocal spell
+"set spelllang=de,en_gb
+"inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 "Text Highlighting
 autocmd vimenter * ++nested hi clear SpellBad 
