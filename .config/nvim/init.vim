@@ -7,6 +7,7 @@ set backspace=start,eol,indent
 set hidden
 set shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent 
 set termguicolors
+set pumheight=5
 
 syntax on
 filetype plugin indent on
@@ -31,6 +32,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'SirVer/ultisnips'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
