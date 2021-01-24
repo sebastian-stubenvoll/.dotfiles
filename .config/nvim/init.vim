@@ -85,7 +85,7 @@ autocmd vimenter * ++nested hi NERDTreeDirSlash guifg=#EBDBB2
 autocmd vimenter * ++nested hi clear NERDTreeCWD
 autocmd vimenter * ++nested hi NERDTreeCWD guifg=#83A598
 
-let g:NERDTreeIndicatorMapCustom = {
+let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Modified"  : "!",
     \ "Staged"    : "✚",
     \ "Untracked" : "\u00a0",
