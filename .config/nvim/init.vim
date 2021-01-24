@@ -33,11 +33,14 @@ Plug 'airblade/vim-gitgutter'
 Plug 'SirVer/ultisnips'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ryanoasis/vim-devicons'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
 call plug#end()
 
 " Nerd Tree toggle
 map <C-n> :NERDTreeToggle<CR>
+
+
 
 "VimTex conceal settings
 let g:tex_flavor = 'latex'
@@ -71,7 +74,33 @@ autocmd vimenter * ++nested hi clear texBoldStyle
 autocmd vimenter * ++nested hi texBoldStyle gui=bold
 
 
-"Coc
+" Nerd Tree Visuals
+let g:WebDevIconsDefaultFolderSymbolColor = '83A598'
+let NERDTreeDirArrowExpandable = "\u00a0" "non breaking space
+let NERDTreeDirArrowCollapsible = "\u00a0" "non breaking space
+autocmd vimenter * ++nested hi clear NERDTreeDir
+autocmd vimenter * ++nested hi NERDTreeDir guifg=#EBDBB2
+autocmd vimenter * ++nested hi clear NERDTreeDirSlash
+autocmd vimenter * ++nested hi NERDTreeDirSlash guifg=#EBDBB2
+autocmd vimenter * ++nested hi clear NERDTreeCWD
+autocmd vimenter * ++nested hi NERDTreeCWD guifg=#83A598
+
+let g:NERDTreeIndicatorMapCustom = {
+    \ "Modified"  : "!",
+    \ "Staged"    : "✚",
+    \ "Untracked" : "\u00a0",
+    \ "Renamed"   : "➜",
+    \ "Unmerged"  : "═",
+    \ "Deleted"   : "✖",
+    \ "Dirty"     : "✗",
+    \ "Clean"     : "✔︎",
+    \ 'Ignored'   : '\u00a0',
+    \ "Unknown"   : "?"
+    \ }
+
+"#####
+"#Coc#
+"#####
 " Give more space for displaying messages.
 set cmdheight=2
 
