@@ -99,6 +99,9 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
     \ "Unknown"   : "?"
     \ }
 
+"Tabline
+let g:airline#extensions#tabline#enabled = 1
+
 "#####
 "#Coc#
 "#####
