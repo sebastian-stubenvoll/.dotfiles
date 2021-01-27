@@ -45,11 +45,12 @@ map <C-n> :NERDTreeToggle<CR>
 
 "VimTex conceal settings
 let g:tex_flavor = 'latex'
-set conceallevel=2
 let g:tex_conceal='abdmgs'
 let g:tex_fast='bcmMprsSvV'
 hi texItalStyle gui=italic
 hi texBoldStyle gui=bold
+autocmd vimenter * ++nested set conceallevel=2
+autocmd vimenter * ++nested set concealcursor=""
 
 "Gruvbox settings
 let g:gruvbox_contrast_dark = 'soft'
@@ -101,7 +102,7 @@ let g:NERDTreeGitStatusIndicatorMapCustom = {
 
 "Tabline
 let g:airline#extensions#tabline#enabled = 1
-
+let g:airline_powerline_fonts = 1
 "#####
 "#Coc#
 "#####
@@ -260,3 +261,5 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
+
+"pls conceal ):
