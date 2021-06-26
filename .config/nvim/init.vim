@@ -5,7 +5,7 @@ set path+=**
 set wildmenu
 set backspace=start,eol,indent
 set hidden
-set shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent
+set shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent smartindent
 set termguicolors
 set pumheight=5
 
@@ -14,6 +14,7 @@ filetype plugin indent on
 
 call plug#begin()
 
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'hdima/python-syntax'
@@ -22,7 +23,6 @@ Plug 'preservim/nerdcommenter'
 Plug 'tpope/vim-repeat'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'sheerun/vim-polyglot'
-Plug 'mxw/vim-jsx'
 Plug 'rsmenon/vim-mathematica'
 Plug 'morhetz/gruvbox'
 Plug 'justinmk/vim-sneak'
@@ -35,6 +35,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'yggdroot/indentline'
+Plug 'https://github.com/honza/vim-snippets'
 
 call plug#end()
 

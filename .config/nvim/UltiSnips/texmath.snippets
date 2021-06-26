@@ -46,12 +46,12 @@ snippet RT "root"
 \sqrt[\leftroot{-3}\uproot{3}$1]{$2}$0
 endsnippet
 
-priority 100
+priority 500
 snippet '((\d+)|(\d*)(\\)?([A-Za-z]+)((\^|_)(\{\d+\}|\d))*)RT\d' "root" wrA
 \sqrt[\leftroot{1}\uproot{2}`!p snip.rv = match.group(0)[-1]`]{`!p snip.rv = match.group(1)`}$0
 endsnippet
 
-priority 1000
+priority 1050
 snippet '^.*\)RT\d' "root" wrA
 `!p
 p = match.string[-1]
@@ -69,7 +69,7 @@ endsnippet
 
 priority 0
 snippet int "integral" w
-\int_${1/.+/{/}${1:lower}${1/.+/}/}^${2/.+/{/}${2:upper}${2/.+/}/} ${3:expression}\ d${4:integration variable} $0
+\int_\{$1\}^\{$2\} $3 $0
 endsnippet
 
 ################
