@@ -36,6 +36,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'yggdroot/indentline'
 Plug 'https://github.com/honza/vim-snippets'
+Plug 'leafOfTree/vim-svelte-plugin'
 
 call plug#end()
 
