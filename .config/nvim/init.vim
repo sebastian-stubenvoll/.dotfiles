@@ -35,7 +35,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ryanoasis/vim-devicons'
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'yggdroot/indentline'
-Plug 'https://github.com/honza/vim-snippets'
+Plug 'honza/vim-snippets'
 Plug 'leafOfTree/vim-svelte-plugin'
 
 call plug#end()
@@ -65,9 +65,20 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 "Spelling
-"setlocal spell
-"set spelllang=de,en_gb
-"inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+setlocal spell
+set spelllang=
+inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
+"Cycle spell language
+let g:SpellLanglist= ["de_de", "en_gb","en_us", ""]
+
+function! SpellLangCycle()
+    let l:lang_index = get(b:, 'lang_index', -1)
+    let l:lang_index = (l:lang_index + 1) % len(g:SpellLanglist)
+    let &spelllang = g:SpellLanglist[l:lang_index]
+    let b:lang_index = l:lang_index
+endfunction
+
+nnoremap <C-s> :call SpellLangCycle()<CR>
 
 "Text Highlighting
 autocmd vimenter * ++nested hi clear SpellBad 
@@ -225,11 +236,6 @@ if has('nvim-0.4.0') || has('patch-8.2.0750')
   vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
   vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 endif
-
-" Use CTRL-S for selections ranges.
-" Requires 'textDocument/selectionRange' support of language server.
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
 
 " Add `:Format` command to format current buffer.
 command! -nargs=0 Format :call CocAction('format')
